@@ -1,0 +1,24 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.navContainer {
+  background-color: violet;
+  padding: 1rem 2rem;
+  position: fixed;  /* Fija el navbar arriba */
+  top: 0;           /* Lo posiciona en la parte superior */
+  left: 0;          /* Asegura que empieza desde el borde izquierdo */
+  width: 100%;      /* Ocupará todo el ancho */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil */
+  z-index: 1000;    /* Asegura que esté por encima de otros elementos */
+}
+
+
+
+.navlink{
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
