@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import Text from "./Text"
 
 const Contador = () => {
 const [count, setCount] = useState(1)
@@ -12,12 +13,29 @@ const restar =() => {
 
 }
 
+console.log('Soy el contador')
+//No es recomendable
+
+useEffect(()=>{
+console.log('Soy el use Effect y me ejecuto siempre que se actualice el componente')
+})
+
+useEffect(()=>{
+    console.log('Soy el use Effect y me ejecuto siempre que se actualice el componente')
+    },[])
+
+    useEffect(()=>{
+        console.log(mostrar)
+        },[mostrar])
+
     return (
 
          <div>
          <button onClick={restar}>- </button>
          <span> {count} </span>
          <button onClick={sumar}>+ </button>
+         {mostrar && <Text/>}
+         <button onClick={()=> setMostrar(!mostrar)}>Mostrar</button>
          </div>
 
     )    

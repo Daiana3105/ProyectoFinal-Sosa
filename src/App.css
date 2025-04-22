@@ -1,24 +1,380 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing: border-box;
+/* Reset */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  padding-top: 50px; /* Para dejar espacio al navbar fijo */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Navbar */
 .navContainer {
-  background-color: violet;
-  padding: 1rem 2rem;
-  position: fixed;  /* Fija el navbar arriba */
-  top: 0;           /* Lo posiciona en la parte superior */
-  left: 0;          /* Asegura que empieza desde el borde izquierdo */
-  width: 100%;      /* Ocupará todo el ancho */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil */
-  z-index: 1000;    /* Asegura que esté por encima de otros elementos */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #ac4fa5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 150px;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.logo {
+  width: 9rem;
+}
+
+/* Contenedor de los botones centrales */
+.navLinksContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLinksContainer a {
+  margin: 0 15px;
+}
+
+/* Estilos generales de los links */
+.navlink {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: color 0.3s ease;
+}
+
+.navlink:hover {
+  color:#ab229b;
+}
+
+/* Botones de info */
+.navButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin: 0 90px;
+}
+
+.navButton:hover {
+  color: #ab229b; 
+  transform: scale(1.1);
+}
+
+/* Info desplegable */
+.infoSection {
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  top: 30px;
+  left: 0;
+  z-index: 10;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Banner */
+.banner {
+  background-image: url('/perfume1.banner.jpg');
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  width: 100vw;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Títulos y descripción del banner */
+.banner h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.banner p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+/* Contenedor general */
+.container {
+  padding: 0 20px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Sección de Productos */
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  max-width: 320px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.product-card {
+  min-height: 200px;
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+.product-card .card-body {
+  padding: 20px;
+}
+
+.product-card .card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.product-card .card-text {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+button {
+  font-size: 1rem;
+  padding: 12px;
+  width: 100%;
+}
+
+.text-center h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color:#f5f5f5;
+}
+.text-center.mt-5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 3rem;
 }
 
 
+.text-center p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #f5f5f5;
+}
 
-.navlink{
-  color: black;
+a {
   text-decoration: none;
+}
+
+button {
+  background-color: #ab229b;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: transparent;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .banner h1 {
+    font-size: 2rem;
+  }
+
+  .banner p {
+    font-size: 1rem;
+  }
+
+  .product-card {
+    margin: 10px 0;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Información desplegable */
+.pop-up {
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  width: 250px;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pop-up.active {
+  display: block;
+}
+
+button:focus {
+  outline: none;
+}
+.chat-bubble {
+  background-color: rgb(20, 175, 25) !important;
+  
+}
+.card-img-top {
+  width: 150%; 
+  height: 250px; 
+  object-fit: cover; 
+  border-radius: 8px; 
+}
+.item-detail-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.item-detail-card {
+  max-width: 500px;
+  width: 100%;
+  background-color: #eeabd8;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgb(40, 40, 40);
+  text-align: center;
+}
+
+.item-detail-card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.item-detail-card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #242222;
+}
+
+.item-detail-card p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.item-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+.item-counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.item-counter-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.counter-number {
+  width: 50px;
+  height: 40px;
+  background-color: #eeabd8;
+  border: 1px solid #eeabd8;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 5px;
   font-weight: bold;
+  font-size: 1.2rem;
+  color: #000;
+}
+.cart-empty {
+  text-align: center;
+  margin-top: 5rem;
+  color: #777;
+}
+/* Animación del campo de búsqueda */
+.searchButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-left: 50px;
+}
+
+.searchButton:hover {
+  transform: scale(1.1);
+}
+
+/* Estilos para la entrada de búsqueda */
+.searchInput {
+  display: block;
+  margin-top: 5px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  width: 300px;
 }
