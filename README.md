@@ -8,7 +8,7 @@ Este proyecto fue realizado con el objetivo de aprender los fundamentos de React
 ### 🚀 Instalacion 
 
 1. Clone el repositorio
-2. Haga el comando `cd CreaTuLanding-Sosa` para moverse a la carpeta del proyecto
+2. Haga el comando `cd ProyectoFinal-Sosa` para moverse a la carpeta del proyecto
 3. Instale dependencias ejecutando npm install
 4. Para levantar la app en servidor local ejecute npm run dev
 
