@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import CartWidget from "./CartWidgetIcon";
 import { FaSearch } from 'react-icons/fa'; // Importamos el ícono de búsqueda
-import '../app.css';
+
 
 const NavbarComponent = () => {
   const [infoVisible, setInfoVisible] = useState(null);
