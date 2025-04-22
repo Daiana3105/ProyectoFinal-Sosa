@@ -69,7 +69,7 @@ export const productos = [
         name: 'Carolina Herrera CH',
         price: 150000,
         description: '🌸 CH Carolina Herrera es una fragancia elegante y femenina, con notas florales, frutales y un toque dulce de praliné. Ideal para mujeres sofisticadas que quieren dejar una huella inolvidable.',
-        stock: 0,
+        stock: 20,
         category: 'mas vendidos',
         img: '../perfume8.jpg'
       },

@@ -378,3 +378,12 @@ button:focus {
   outline: none;
   width: 300px;
 }
+.itemlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f5f5f5; /* Fondo claro */
+}
+
