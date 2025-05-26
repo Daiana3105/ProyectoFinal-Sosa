@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useCart} from '../context/CartContext'
 import { addDoc, collection, getDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { Link } from 'react-router-dom'
 
 import  {db}  from '../service/firebase'
 
@@ -60,24 +61,63 @@ const CheckoutForm = () => {
     }
   return (
     <>
-    {
-        orderId ? <div>
-            <h2>Compra realizada!</h2>
-            <h4>Su id es: {orderId}</h4>
-        </div>
-    :<div>
-     <h1>Complete con sus datos</h1> 
-     <form onSubmit={finalizarCompra}>
-        <input className='form-control' type="text" name='name' placeholder='Ingrese su nombre' onChange={buyerData}/>
-        <input className='form-control' type="text" name='lastname' placeholder='Ingrese su apellido' onChange={buyerData}/>
-        <input className='form-control' type="text" name='address' placeholder='Ingrese su direccion' onChange={buyerData}/>
-        <input className='form-control' type="text" name='email' placeholder='Ingrese su correo' onChange={buyerData}/>
-        <input className='form-control' type="text" name='emailConfirm' placeholder='Repita su correo' onChange={(e) => setValidateMail(e.target.value)}/>
-        <button className='btn btn-success' type='submit'>Enviar</button>
-     </form>
+  {orderId ? (
+    <div className="text-center mt-5">
+        <h2 style={{ color: '#333' }}>¡Compra realizada!</h2>
+        <h4 style={{ color: '#555' }}>Su ID es: {orderId}</h4>
+      <Link className="btn btn-dark btn-sm" to="/">
+      Ir al inicio
+    </Link>
     </div>
-}
+  ) : (
+    <>
+      <div className="checkout-header">
+        <h2>¡Casi listo para completar tu orden!</h2>
+        <p>Revisá que los productos en tu carrito sean los correctos antes de finalizar.</p>
+      </div>
+
+      <div className="checkout-card">
+        <form className="checkout-form" onSubmit={finalizarCompra} autoComplete="off">
+          <div>
+            <label htmlFor="name">Nombre</label>
+            <input type="text" name="name" placeholder="Nombre" onChange={buyerData} />
+          </div>
+          <div>
+            <label htmlFor="lastname">Apellido</label>
+            <input type="text" name="lastname" placeholder="Apellido" onChange={buyerData} />
+          </div>
+          <div>
+            <label htmlFor="address">Dirección</label>
+            <input type="text" name="address" placeholder="Dirección" onChange={buyerData} />
+          </div>
+          <div>
+            <label htmlFor="phone">Número de Teléfono</label>
+            <input type="text" name="phone" placeholder="Número" onChange={buyerData} />
+          </div>
+          <div>
+            <label htmlFor="email">Correo electrónico</label>
+            <input type="email" name="email" placeholder="Correo" onChange={buyerData} />
+          </div>
+          <div>
+            <label htmlFor="emailConfirm">Confirmar correo electrónico</label>
+            <input type="email" name="emailConfirm" placeholder="Confirmá tu correo" onChange={(e) => setValidateMail(e.target.value)} />
+          </div>
+          <div className="full-width">
+            <label>
+              <input type="checkbox" required /> Acepto los términos y condiciones
+            </label>
+          </div>
+
+          <div className="full-width button-group">
+            <button className="btn-yellow" type="submit">Completar Compra</button>
+            <button className="btn-outline" type="button" onClick={clear}>Cancelar orden</button>
+          </div>
+        </form>
+      </div>
     </>
+  )}
+</>
+
   )
 }
 

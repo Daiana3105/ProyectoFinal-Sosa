@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaWhatsapp } from 'react-icons/fa';
 import "./ChatBubble.css";  // Asegúrate de que el CSS esté bien vinculado
 
 // Usamos el logo de WhatsApp
@@ -13,22 +14,15 @@ const ChatBubble = () => {
     setShowChat(!showChat);
   };
 
-  return (
-    <div>
-      {/* Icono de WhatsApp */}
-      <div className="chat-bubble" onClick={toggleChat}>
-        <img src='../logowpp.png' alt="Chat con WhatsApp" />
-      </div>
-
-      {/* El chat que se abre */}
-      {showChat && (
-        <div className="chat-container">
-          <h3>¡Hola! ¿Cómo podemos ayudarte?</h3>
-          <textarea placeholder="Escribe tu mensaje..." rows="4" style={{ width: '100%' }}></textarea>
-          <button className="send-button">Enviar</button>
-        </div>
-      )}
-    </div>
+      return (
+    <a
+      href="https://api.whatsapp.com/send?phone=3512294152"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="chat-bubble"
+    >
+      <FaWhatsapp size={32} color="#fff" />
+    </a>
   );
 };
 

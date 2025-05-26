@@ -1,32 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Card, Collapse } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../service/firebase';
 import '../App.css';
 import ChatBubble from './ChatBubble';
 
+// Swiper imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+// Social and contact icons
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
+
 function Home() {
   const [productos, setProductos] = useState([]);
-  const [mostrarCategorias, setMostrarCategorias] = useState(false);
+  const swiperRef = useRef(null);
 
   useEffect(() => {
-    const getProductos = async () => {
+    async function fetchPerfumes() {
       try {
-        const prodCollection = collection(db, 'perfumes');
-        const res = await getDocs(prodCollection);
-        const list = res.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setProductos(list.slice(0, 12)); 
-      } catch (error) {
-        console.error("Error al traer productos:", error);
+        const snap = await getDocs(collection(db, 'perfumes'));
+        const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setProductos(list.slice(0, 12));
+      } catch (err) {
+        console.error('Error fetching perfumes:', err);
       }
-    };
-
-    getProductos();
+    }
+    fetchPerfumes();
   }, []);
 
-  const toggleCategorias = () => {
-    setMostrarCategorias(!mostrarCategorias);
+  // Keep autoplay on refresh
+  useEffect(() => {
+    if (swiperRef.current?.autoplay) swiperRef.current.autoplay.start();
+  }, []);
+
+  const ofertas = productos.filter(p => p.category === 'ofertas');
+
+  const sliderSettings = {
+    modules: [Autoplay, Pagination],
+    slidesPerView: 1,
+    spaceBetween: 30,
+    centeredSlides: true,
+    loop: true,
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    pagination: { clickable: true }
   };
 
   return (
@@ -37,22 +57,41 @@ function Home() {
         <p>Bienvenido/a a nuestra tienda de perfumes, donde cada fragancia cuenta una historia.</p>
       </div>
 
-      {/* Galería de Productos en Imágenes */}
+      {/* Carrusel de Ofertas Destacadas */}
+      <div className="seccion-ofertas text-center">
+        <h2 className="titulo-ofertas">🔥 OFERTAS DESTACADAS 🔥</h2>
+        <Swiper
+          {...sliderSettings}
+          onSwiper={swiper => { swiperRef.current = swiper }}
+          style={{ maxWidth: 350, margin: '2rem auto' }}
+        >
+          {ofertas.map(prod => (
+            <SwiperSlide key={prod.id}>
+              <div className="card-oferta text-center">
+                <img src={prod.img} alt={prod.name} className="img-oferta" />
+                <h5 className="nombre-oferta mt-2">{prod.name}</h5>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Galería de Productos */}
       <div className="galeria-imagenes mt-5 text-center">
         <h2>Nuestros perfumes</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-          {productos.map((prod) => (
+        <div className="d-flex flex-wrap justify-content-center">
+          {productos.map(prod => (
             <img
               key={prod.id}
               src={prod.img}
               alt={prod.name}
               style={{
-                width: '200px',
-                height: '200px',
+                width: 200,
+                height: 200,
                 objectFit: 'cover',
-                margin: '10px',
-                borderRadius: '10px',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+                borderRadius: 10,
+                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                margin: '10px'
               }}
             />
           ))}
@@ -60,157 +99,106 @@ function Home() {
       </div>
 
       {/* Sección de Productos */}
-<Container className="mt-5">
-  <h2 className="text-center text-white mb-4">Explora nuestros productos</h2>
+      <Container className="mt-5">
+        <h2 className="text-center text-white mb-4">Explora nuestros productos</h2>
+        <Row className="g-4 justify-content-center">
+          <Col md={4}>
+            <Card className="product-card h-100 text-center">
+              <Card.Body className="d-flex flex-column justify-content-between">
+                <div>
+                  <Card.Title>Perfumes Nuevos</Card.Title>
+                  <Card.Text>Lo último en fragancias, recién llegadas para vos.</Card.Text>
+                </div>
+                <Link to="/category/nuevos">
+                  <Button variant="dark" className="mt-3 w-100">Ver más</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4}>
+            <Card className="product-card h-100 text-center">
+              <Card.Body className="d-flex flex-column justify-content-between">
+                <div>
+                  <Card.Title>Más Vendidos</Card.Title>
+                  <Card.Text>Los favoritos de nuestros clientes.</Card.Text>
+                </div>
+                <Link to="/category/mas vendidos">
+                  <Button variant="dark" className="mt-3 w-100">Ver más</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4}>
+            <Card className="product-card h-100 text-center">
+              <Card.Body className="d-flex flex-column justify-content-between">
+                <div>
+                  <Card.Title>Ofertas Exclusivas</Card.Title>
+                  <Card.Text>Promociones y descuentos imperdibles.</Card.Text>
+                </div>
+                <Link to="/category/ofertas">
+                  <Button variant="dark" className="mt-3 w-100">Ver más</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
 
-  <Row className="g-4 justify-content-center">
-    {/* Perfumes Nuevos */}
-    <Col md={4}>
-      <Card className="product-card h-100 text-center">
-        <Card.Body className="d-flex flex-column justify-content-between">
-          <div>
-            <Card.Title>Perfumes Nuevos</Card.Title>
-            <Card.Text>Lo último en fragancias, recién llegadas para vos.</Card.Text>
+      {/* Top Bar Redes Sociales */}
+      <div className="social-bar">
+        <Container className="d-flex justify-content-between align-items-center">
+          <span>Buscanos en nuestras Redes Sociales</span>
+          <div className="d-flex gap-3">
+            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}><FaFacebookF size={20} /></a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}><FaInstagram size={20} /></a>
+            <a href="https://api.whatsapp.com/send?phone=3512294152" target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}><FaWhatsapp size={20} /></a>
           </div>
-          <Link to="/category/nuevos">
-            <Button variant="dark" className="w-100 mt-3">Ver más</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-    </Col>
-
-    {/* Más Vendidos */}
-    <Col md={4}>
-      <Card className="product-card h-100 text-center">
-        <Card.Body className="d-flex flex-column justify-content-between">
-          <div>
-            <Card.Title>Más Vendidos</Card.Title>
-            <Card.Text>Los favoritos de nuestros clientes.</Card.Text>
-          </div>
-          <Link to="/category/mas vendidos">
-            <Button variant="dark" className="w-100 mt-3">Ver más</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-    </Col>
-
-    {/* Ofertas */}
-    <Col md={4}>
-      <Card className="product-card h-100 text-center">
-        <Card.Body className="d-flex flex-column justify-content-between">
-          <div>
-            <Card.Title>Ofertas Exclusivas</Card.Title>
-            <Card.Text>Promociones y descuentos imperdibles.</Card.Text>
-          </div>
-          <Link to="/category/ofertas">
-            <Button variant="dark" className="w-100 mt-3">Ver más</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-    </Col>
-  </Row>
-</Container>
-
-
-      {/* Sección de Regalos */}
-      <div className="text-center mt-5">
-        <h3>¿Querés sorprender con un regalo?</h3>
-        <p>Elegí el perfume ideal para esa persona especial.</p>
-        <Button 
-          variant="outline primary" 
-          style={{ 
-            fontSize: '1.1rem', 
-            padding: '8px 20px', // Reducido para que no se vea tan largo
-            borderRadius: '30px', 
-            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', 
-            transition: 'all 0.3s ease', 
-            fontWeight: 'bold',
-            borderColor: '#d4af37', // Tono dorado
-            color: '#d4af37', // Tono dorado
-            backgroundColor: 'transparent', // Fondo transparente para hacerlo más elegante
-            width: 'auto', // Esto evita que se estire a lo largo de la pantalla
-            margin: '0 auto', // Centra el botón en su contenedor
-            display: 'block', // Asegura que el botón sea un bloque centrado
-       
-          }} 
-          onClick={toggleCategorias}
-          className="mb-4"
-        >
-          Empezar a comprar
-        </Button>
-
-        <Collapse in={mostrarCategorias}>
-          <div className="mt-4">
-            <Button 
-              variant="light" 
-              style={{ 
-                width: '100%', 
-                padding: '12px 20px', 
-                marginBottom: '10px', 
-                borderRadius: '8px', 
-                fontWeight: 'bold', 
-                backgroundColor: '#f8f9fa', 
-                borderColor: '#ccc', 
-                transition: 'all 0.2s ease',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' 
-              }}
-            >
-              <Link to="/category/nuevos" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Perfumes Nuevos
-              </Link>
-            </Button>
-
-            <Button 
-              variant="light" 
-              style={{ 
-                width: '100%', 
-                padding: '12px 20px', 
-                marginBottom: '10px', 
-                borderRadius: '8px', 
-                fontWeight: 'bold', 
-                backgroundColor: '#f8f9fa', 
-                borderColor: '#ccc', 
-                transition: 'all 0.2s ease',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' 
-              }}
-            >
-              <Link to="/category/mas vendidos" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Más Vendidos
-              </Link>
-            </Button>
-
-            <Button 
-              variant="light" 
-              style={{ 
-                width: '100%', 
-                padding: '12px 20px', 
-                marginBottom: '10px', 
-                borderRadius: '8px', 
-                fontWeight: 'bold', 
-                backgroundColor: '#f8f9fa', 
-                borderColor: '#ccc', 
-                transition: 'all 0.2s ease',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' 
-              }}
-            >
-              <Link to="/category/ofertas" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Ofertas Exclusivas
-              </Link>
-            </Button>
-          </div>
-        </Collapse>
+        </Container>
       </div>
 
-      <footer style={{
-        height: '60px',
-        marginTop: '40px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <ChatBubble />
-        <p style={{ margin: 0, color : 'grey' }}>© 2025 Tu Tienda de Perfumes</p>
-      </footer>
+      {/* Footer Principal */}
+      <div className="footer-main">
+        <Container>
+          <Row>
+            <Col md={3} className="mb-4">
+              <h5 style={{ color: '#fff' }}>TU TIENDA DE PERFUMES</h5>
+              <p>Aquí organizamos tu contenido. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </Col>
+            <Col md={3} className="mb-4">
+              <h5 style={{ color: '#fff' }}>SECCIONES</h5>
+              <ul className="list-unstyled">
+                <li><Link to="/category" className="text-light">Menu</Link></li>
+                <li><Link to="/category/nuevos" className="text-light">Perfumes Nuevos</Link></li>
+                <li><Link to="/category/mas vendidos" className="text-light">Más Vendidos</Link></li>
+                <li><Link to="/category/ofertas" className="text-light">Ofertas Exclusivas</Link></li>
+              </ul>
+            </Col>
+            <Col md={3} className="mb-4">
+              <h5 style={{ color: '#fff' }}>ENLACES DE INTERÉS</h5>
+              <ul className="list-unstyled">
+                <li>⚙️ Sitio desarrollado por SosaDaiana</li>
+                <li><Link to="/contacto" className="text-light">¿Querés uno así para tu negocio?</Link></li>
+              </ul>
+              </Col>
+            <Col md={3} className="mb-4">
+              <h5 style={{ color: '#fff' }}>CONTACTO</h5>
+              <ul className="list-unstyled">
+                <li><FaMapMarkerAlt /> El Abejional, San Pablo de León Cortés</li>
+                <li><FaEnvelope /> info@example.com</li>
+                <li><FaPhone /> +506 60190259 / +506 62531144</li>
+              </ul>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      {/* —————— COPYRIGHT BAR —————— */}
+<div className="copyright-bar">
+  <Container>
+    <p>© {new Date().getFullYear()} Tu Tienda de Perfumes. Todos los derechos reservados.</p>
+  </Container>
+</div>
+
+      {/* Chat Bubble Component */}
       <ChatBubble />
     </div>
   );

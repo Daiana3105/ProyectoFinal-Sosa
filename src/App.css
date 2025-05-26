@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+
 /* Reset */
 body, html, #root {
   margin: 0;
@@ -6,7 +9,6 @@ body, html, #root {
   padding-top: 50px; /* Para dejar espacio al navbar fijo */
   width: 100%;
   height: 100%;
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -17,7 +19,7 @@ body, html, #root {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 10;
   background-color: #ac4fa5;
   display: flex;
   justify-content: space-between;
@@ -36,7 +38,9 @@ body, html, #root {
 .navLinksContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  position: relative;
+  
 }
 
 .navLinksContainer a {
@@ -49,6 +53,7 @@ body, html, #root {
   text-decoration: none;
   padding: 10px 20px;
   transition: color 0.3s ease;
+  z-index: 10;
 }
 
 .navlink:hover {
@@ -64,11 +69,13 @@ body, html, #root {
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
   margin: 0 90px;
+  z-index: 1001;
 }
 
 .navButton:hover {
   color: #ab229b; 
   transform: scale(1.1);
+  
 }
 
 /* Info desplegable */
@@ -387,3 +394,370 @@ button:focus {
   background-color: #f5f5f5; /* Fondo claro */
 }
 
+
+.dropdown {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1002;
+  min-width: 150px;
+  padding: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.dropdownItem {
+  display: block;
+  padding: 8px 12px;
+  color: black;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
+
+.dropdownWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.no-products-message {
+  text-align: center;
+  color: #dc3545; /* rojo Bootstrap */
+  font-size: 1.2rem;
+  margin-top: 30px;
+  font-weight: 500;
+}
+.category-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #7b2cbf;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.category-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  color: #e63946;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  display: block;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-title {
+  white-space: nowrap;        
+  overflow: hidden;           
+  text-overflow: ellipsis;    
+  max-width: 100%;            
+}
+
+.cart-summary {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;  /* Fondo para que se vea bien */
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  z-index: 1000;
+}
+
+.container {
+  padding-bottom: 100px; /* Para que el contenido no quede tapado por la barra fija */
+}
+.button-group {
+  margin-right: 10rem; /* o el espacio que necesites */
+}
+
+.btn-sm {
+  white-space: nowrap;       /* evita el salto de línea */
+  min-width: px;          /* o el ancho que prefieras */
+  text-align: center;
+}
+
+.cart-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  min-width: 220px; /* 👈 esto es CLAVE */
+  max-width: 300px;
+  margin: auto;
+}
+
+
+.cart-item-img {
+  max-width: 100px;
+  height: auto;
+}
+
+.cart-item-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.cart-item-info  {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.cart-item-title {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cart-item-btn {
+  width: auto;
+}
+.cart-item-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.cart-item-info span {
+  display: block; /* fuerza que cada línea esté separada */
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.small-delete-btn {
+  color: #d33;
+  border-color: #d33;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body .btn {
+  margin-top: auto;
+}
+.card-title {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  display: block;
+}
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 20px;
+}
+.text-center{
+  color: #ccc;
+}
+.titulo-ofertas {
+  color: #444; 
+}
+
+/* formulario */
+
+.checkout-header {
+  background-color: #d1f3fd;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-header h2 {
+  color: #005f7f;
+  margin-bottom: 0.5rem;
+}
+
+.checkout-card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+}
+
+.checkout-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.checkout-form label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.checkout-form input {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+}
+
+
+.checkout-form input::placeholder {
+  color: #888;
+}
+.full-width {
+  grid-column: span 2;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.btn-yellow {
+  background-color: #ac4fa5;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  color: #000;
+  border-radius: 0.4rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-yellow:hover {
+  background-color: #ac4fa5;
+}
+
+.btn-outline {
+  background: rgb(0, 0, 0);
+  border: 1px solid #000000;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.4rem;
+  font-weight: bold;
+}
+.btn-outline:hover{
+  background: rgb(0, 0, 0);
+}
+
+/* Seccion ofertas */
+
+
+.seccion-ofertas {
+  background: linear-gradient(to bottom, #fff, #f7f7f7);
+  padding: 3rem 1rem;
+}
+
+.titulo-ofertas {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #7b2cbf;
+  margin-bottom: 2rem;
+}
+
+.card-oferta {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  max-width: 300px;
+  margin: auto;
+}
+
+.card-oferta:hover {
+  transform: scale(1.05);
+}
+
+.img-oferta {
+  max-width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.nombre-oferta {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.social-bar {
+  background-color: #9933aa;
+  color: #fff;
+  padding: 0.25rem 0; 
+}
+.social-bar a:hover {
+  color: #ba68c8;
+}
+
+.social-bar .social-text {
+  font-size: 0.9rem;           /* texto mas pequeño */
+}
+.social-bar .social-icons a {
+  font-size: 1rem;             /* iconos mas chicos */
+}
+.footer-main {
+  background-color: #2c2c2c;
+  color: #ddd;
+  padding: 3rem 0;
+}
+.footer-main h5 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.footer-main a {
+  color: #ddd;
+  text-decoration: none;
+}
+.footer-main a:hover {
+  color: #9933aa;
+}
+/* Lista sin bullets y con espacio */
+.footer-main ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-main ul li {
+  margin-bottom: .5rem;
+}
+.footer-main .separator {
+  height: 2px;
+  width: 50px;
+  background-color: #f8bbd0;
+  margin: .5rem 0 1rem;
+}
+/* Barra de copyright */
+.copyright-bar {
+  background-color: #111;
+  color: #ddd;
+  padding: 0.50rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  
+}

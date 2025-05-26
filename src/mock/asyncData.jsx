@@ -25,7 +25,7 @@ export const productos = [
         price: 240000,
         description: 'Dior Poison Girl es una fragancia intensa y moderna, pensada para quienes viven con autenticidad y determinación. Sus notas de naranja amarga, rosa damascena y vainilla crean un aroma envolvente y vibrante, ideal para expresarte con confianza y estilo propio.',
         stock: 20,
-        category: 'nuevos',
+        category: ["mujer", "nuevos"],
         img: '../perfume3.jpg'
       },
       {
@@ -34,7 +34,7 @@ export const productos = [
         price: 240000,
         description: 'Dior Dune es una fragancia armoniosa y serena, inspirada en la conexión con la naturaleza y la libertad interior. Con notas de peonía, ámbar y sándalo, evoca la brisa marina y los paisajes cálidos, ideal para quienes buscan equilibrio, calma y expresión auténtica.',
         stock: 20,
-        category: 'nuevos',
+        category: 'mujer',
         img: '../perfume4.jpg'
       },
       {
@@ -43,7 +43,7 @@ export const productos = [
         price: 180000,
         description: 'Dior Sauvage es una fragancia intensa y libre, inspirada en paisajes abiertos y cielos infinitos. Con notas frescas de bergamota y un fondo amaderado especiado, expresa fuerza, autenticidad y carácter, sin etiquetas ni límites. Ideal para quienes viven su esencia con determinación.',
         stock: 20,
-        category: 'mas vendidos',
+        category: 'hombre',
         img: '../perfume5.jpg'
       },
       {

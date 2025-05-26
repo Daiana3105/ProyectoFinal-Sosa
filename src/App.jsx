@@ -11,7 +11,7 @@ import CheckoutForm from './components/CheckoutForm'
 import Cart from './components/Cart'
 import Home from './components/Home'
 import ChatBubble from './components/ChatBubble';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App(){
@@ -29,7 +29,7 @@ return(
     <NavbarComponent/>
     <Routes>
        <Route path="/" element={<Home />} />
-       <Route path= '/category/:categoryId' element={<ItemListContainer greeting= 'Seleccionaste la categoria:'/>} />
+       <Route path= '/category/:categoryId' element={<ItemListContainer greeting/>} />
        <Route path='/cart' element={<Cart/>} />
        <Route path ='/CheckoutForm' element={<CheckoutForm/>}/>
        <Route path= '*' element={<ErrorPage/>}/>
@@ -37,8 +37,7 @@ return(
     </Routes>
     <ChatBubble/>
     </CartProvider>
-
-    </BrowserRouter>
+  </BrowserRouter>
   )
 }
 

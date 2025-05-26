@@ -5,6 +5,11 @@ import { useParams } from "react-router-dom"
 import { collection, getDocs, where, query, addDoc } from "firebase/firestore"
 import { db }  from '../service/firebase'
 import LoaderComponent from "./LoaderComponent"
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
+
 
 
 
@@ -12,15 +17,18 @@ const ItemListContainer = ({greeting}) => {
 const [data, setData]= useState([])
 const [loading, setLoading] = useState(false)
 const {categoryId} = useParams()
+const navigate = useNavigate();
+
 
 
 //Firebase
 
 useEffect(()=> {
+  console.log("categoryId recibido:", categoryId);
   setLoading(true)
   //conectamos con nuestra collection
-  const productCollection = categoryId
-  ? query(collection(db, "perfumes"), where("category","==", categoryId))
+  const productCollection = categoryId && categoryId !== "todos"
+  ? query(collection(db, "perfumes"), where("category", "array-contains", categoryId))
   :collection(db, "perfumes")
 //pedir los documentos
 getDocs(productCollection)
@@ -88,24 +96,44 @@ const subirData = () => {
 }
     console.log('Hola soy ItemListContainer')
       return (
-        <main>
-          <h1 className='text-success'>{greeting}</h1>
+        <main style={{ marginTop: '50px' }}>
+        <h1 className='text-success'>{greeting}</h1>
       
-          {categoryId && (
-            <h2 className="text-primary">
-              {" "}
-              <strong>{categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}</strong>
-            </h2>
-          )}
+        {categoryId && (
+          <>
+            <h2 className="category-heading">Seleccionaste la categoría:</h2>
+            <h3 className="category-subtitle">
+              {categoryId === "todos"
+                ? "Todos los productos"
+                : categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}
+            </h3>
+          </>
+        )}
       
-          {loading ? <LoaderComponent/> : <ItemList data={data}/>}
-        </main>
+      {loading ? (
+  <LoaderComponent />
+) : data.length === 0 ? (
+  <>
+    <p className="no-products-message">No se encontraron productos para esta categoría.</p>
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+    <Link className="btn btn-dark btn-sm" to="/">
+      Ir al inicio
+    </Link>
+    </div>
+  </>
+) : (
+  <ItemList data={data} />
+)}
+
+      </main>
+      
+      
       )
       
         //<main>
         //<h1 className= 'text-success'>{greeting}</h1>
         {/*{data.map((item)=> <p key={item.id}>{item.name}</p>)}*/}
-        {loading ? <LoaderComponent/> : <ItemList data={data}/>}
+        /*{loading ? <LoaderComponent/> : <ItemList data={data}/>}*/
         {/*<button onClick={subirData}>Firebase UNA SOLA VEZ</button>*/}
         //</main>
     
