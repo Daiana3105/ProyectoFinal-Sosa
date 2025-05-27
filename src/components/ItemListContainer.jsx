@@ -96,7 +96,7 @@ const subirData = () => {
 }
     console.log('Hola soy ItemListContainer')
       return (
-        <main style={{ marginTop: '50px' }}>
+        <main style={{ paddingTop: '160px' }}>
         <h1 className='text-success'>{greeting}</h1>
       
         {categoryId && (

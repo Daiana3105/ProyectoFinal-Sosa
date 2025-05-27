@@ -32,7 +32,9 @@ const CartItem = ({ compra }) => {
   }
 
   return (
-    <div className="cart-item-container">
+    
+    <div className="cart-item-container"style={{ paddingTop: '50px' }}>
+      
       <img
         src={compra.img}
         alt={compra.name}

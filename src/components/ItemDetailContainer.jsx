@@ -62,7 +62,7 @@ const ItemDetailContainer = ({cart,setCart}) => {
 //},[])
 
 if(invalid){
-  return<div>
+  return<div>style={{ paddingTop: '0px' }}
     <h2>Producto no existe</h2>
   </div>
 }

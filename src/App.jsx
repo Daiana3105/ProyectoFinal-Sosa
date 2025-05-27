@@ -11,6 +11,7 @@ import CheckoutForm from './components/CheckoutForm'
 import Cart from './components/Cart'
 import Home from './components/Home'
 import ChatBubble from './components/ChatBubble';
+import Contacto from './components/Contacto'
 
 
 
@@ -34,6 +35,7 @@ return(
        <Route path ='/CheckoutForm' element={<CheckoutForm/>}/>
        <Route path= '*' element={<ErrorPage/>}/>
        <Route path="/item/:id" element={<ItemDetailContainer />} />
+       <Route path="/contacto" element={<Contacto />} />
     </Routes>
     <ChatBubble/>
     </CartProvider>

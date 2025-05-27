@@ -5,13 +5,15 @@
 body, html, #root {
   margin: 0;
   padding: 0;
+  background-color:#b8b8b8;
   font-family: Arial, sans-serif;
-  padding-top: 50px; /* Para dejar espacio al navbar fijo */
+  padding-top: 0px; /* Para dejar espacio al navbar fijo */
   width: 100%;
   height: 100%;
   flex-direction: column;
   align-items: center;
 }
+
 
 /* Navbar */
 .navContainer {
@@ -20,11 +22,11 @@ body, html, #root {
   left: 0;
   width: 100%;
   z-index: 10;
-  background-color: #ac4fa5;
+  background-color: #ac4fa4b6;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   height: 150px;
   box-sizing: border-box;
   margin-bottom: 0;
@@ -38,8 +40,7 @@ body, html, #root {
 .navLinksContainer {
   display: flex;
   align-items: center;
-  gap: 10px;
-  position: relative;
+  gap: 50px; /* Espacio entre Categorías, Contacto, etc. */
   
 }
 
@@ -54,6 +55,7 @@ body, html, #root {
   padding: 10px 20px;
   transition: color 0.3s ease;
   z-index: 10;
+  margin-right: 1.5rem;
 }
 
 .navlink:hover {
@@ -68,8 +70,8 @@ body, html, #root {
   font-size: 16px;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
-  margin: 0 90px;
   z-index: 1001;
+  padding: 25px 50px;
 }
 
 .navButton:hover {
@@ -78,30 +80,6 @@ body, html, #root {
   
 }
 
-/* Info desplegable */
-.infoSection {
-  position: absolute;
-  background-color: #fff;
-  color: #333;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 250px;
-  top: 30px;
-  left: 0;
-  z-index: 10;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Banner */
 .banner {
@@ -117,7 +95,7 @@ body, html, #root {
   text-align: center;
   padding: 0 20px;
   width: 100vw;
-  margin-top: 0;
+  margin-top: 150px;
   padding-top: 0;
 }
 
@@ -602,6 +580,7 @@ button:focus {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   max-width: 800px;
   margin: auto;
+  margin-top: 1rem;
 }
 
 .checkout-form {
@@ -634,6 +613,7 @@ button:focus {
 
 .button-group {
   display: flex;
+  gap: 10rem;
   justify-content: space-between;
   margin-top: 1.5rem;
 }
@@ -707,30 +687,12 @@ button:focus {
   color: #444;
 }
 
-.social-bar {
-  background-color: #9933aa;
-  color: #fff;
-  padding: 0.25rem 0; 
-}
-.social-bar a:hover {
-  color: #ba68c8;
-}
-
-.social-bar .social-text {
-  font-size: 0.9rem;           /* texto mas pequeño */
-}
-.social-bar .social-icons a {
-  font-size: 1rem;             /* iconos mas chicos */
-}
 .footer-main {
-  background-color: #2c2c2c;
+  background-color: hsl(0, 0%, 14%);
   color: #ddd;
   padding: 3rem 0;
 }
-.footer-main h5 {
-  color: #fff;
-  margin-bottom: 1rem;
-}
+
 .footer-main a {
   color: #ddd;
   text-decoration: none;
@@ -747,17 +709,208 @@ button:focus {
   margin-bottom: .5rem;
 }
 .footer-main .separator {
-  height: 2px;
-  width: 50px;
-  background-color: #f8bbd0;
-  margin: .5rem 0 1rem;
+  max-width: 1200px;
+  margin: auto;
 }
-/* Barra de copyright */
-.copyright-bar {
-  background-color: #111;
-  color: #ddd;
-  padding: 0.50rem 0;
+@media (max-width: 768px) {
+  .footer-main .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+/*copyright*/
+
+.container {
+  padding: 0 20px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+}
+.footer-main .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  align-items: flex-start !important;
+}
+
+.footer-main .container {
+  max-width: 1400px;
+  margin: auto;
+}
+
+.footer-main .col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.footer-row {
+  display: flex;
+  align-items: flex-start; /* 🔥 esto alinea todas las columnas arriba */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-main .col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-columns > div {
+  flex: 1;
+  min-width: 220px;
+  max-width: 400px;
+}
+/*barra social*/
+.social-bar {
+  background-color: #9933aa;
+  color: #fff;
   text-align: center;
-  font-size: 0.875rem;
-  
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+.social-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-text {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #f8bbd0;
+}
+.video-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+}
+
+.video-container iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/*Contacto*/
+
+.contacto-wrapper {
+  padding: 2rem;
+  color: white;
+  background-color: #1e1e1e;
+  text-align: center;
+}
+
+.contact-info {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.contact-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.contact-form {
+  background-color: #f8f9fa;
+  color: black;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  padding: 0.75rem;
+  background-color: #9933aa;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #b45ac0;
+}
+
+.mapa {
+  flex: 1;
+  min-width: 300px;
+  height: 400px;
+  max-width: 600px;
+}
+.navLinksContainer a,
+.navLinksContainer button {
+  margin: 0 20px; /* margen más equilibrado */
+}
+.navContainer > .navlink:last-child {
+  margin-right: 2rem; /* separa el carrito del borde derecho */
+}
+
+nav + div:empty {
+  display: none;
+}
+/* Info desplegable */
+.infoSection {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 180px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

@@ -32,7 +32,7 @@ const CartView = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container"style={{ paddingTop: '100px' }}>
       <h2 className="my-4">Tu carrito</h2>
       {cart.length === 0 ? (
         <p>No hay productos en tu carrito.</p>

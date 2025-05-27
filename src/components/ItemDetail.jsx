@@ -17,7 +17,7 @@ const ItemDetail = ({product}) => {
   }
   console.log(product)
   return (
-    <div className="item-detail-container">
+    <div className="item-detail-container"style={{ paddingTop: '160px' }}>
     <div className="item-detail-card">
       <h1>Detalle del producto: {product.name}</h1>
       <img src={product.img} alt={product.name} />

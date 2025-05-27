@@ -63,6 +63,7 @@ const CheckoutForm = () => {
     <>
   {orderId ? (
     <div className="text-center mt-5">
+      style={{ paddingTop: '150px' }}
         <h2 style={{ color: '#333' }}>¡Compra realizada!</h2>
         <h4 style={{ color: '#555' }}>Su ID es: {orderId}</h4>
       <Link className="btn btn-dark btn-sm" to="/">
@@ -71,12 +72,12 @@ const CheckoutForm = () => {
     </div>
   ) : (
     <>
-      <div className="checkout-header">
+      <div className="checkout-header"style={{ paddingTop: '150px' }}>
         <h2>¡Casi listo para completar tu orden!</h2>
         <p>Revisá que los productos en tu carrito sean los correctos antes de finalizar.</p>
       </div>
 
-      <div className="checkout-card">
+      <div className="checkout-card"style={{ marginTop: '1rem' }}>
         <form className="checkout-form" onSubmit={finalizarCompra} autoComplete="off">
           <div>
             <label htmlFor="name">Nombre</label>

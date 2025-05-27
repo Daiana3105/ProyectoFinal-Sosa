@@ -50,7 +50,9 @@ function Home() {
   };
 
   return (
-    <div>
+         <div>
+    {/* Espaciador para compensar el navbar fijo */}
+    <div style={{ paddingTop: '0px' }}></div>
       {/* Banner Principal */}
       <div className="banner">
         <h1>Descubrí tu aroma ideal</h1>
@@ -98,7 +100,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Sección de Productos */}
+      {/* Sección de Productos 
       <Container className="mt-5">
         <h2 className="text-center text-white mb-4">Explora nuestros productos</h2>
         <Row className="g-4 justify-content-center">
@@ -142,61 +144,93 @@ function Home() {
             </Card>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
+
+      {/* Video youtube */}
+
+      <div className="video-container">
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/9lWaLc5mRds"
+    title="Publicidad de Perfume"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
 
       {/* Top Bar Redes Sociales */}
       <div className="social-bar">
-        <Container className="d-flex justify-content-between align-items-center">
-          <span>Buscanos en nuestras Redes Sociales</span>
-          <div className="d-flex gap-3">
-            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}><FaFacebookF size={20} /></a>
-            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}><FaInstagram size={20} /></a>
-            <a href="https://api.whatsapp.com/send?phone=3512294152" target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}><FaWhatsapp size={20} /></a>
-          </div>
-        </Container>
+      <Container className="social-content">
+  <span className="social-text">Buscanos en nuestras Redes Sociales</span>
+  <div className="social-icons">
+    <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer"><FaFacebookF size={20} /></a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"><FaInstagram size={20} /></a>
+    <a href="https://api.whatsapp.com/send?phone=3512294152" target="_blank" rel="noopener noreferrer"><FaWhatsapp size={20} /></a>
+  </div>
+</Container>
+
       </div>
 
       {/* Footer Principal */}
       <div className="footer-main">
-        <Container>
-          <Row>
-            <Col md={3} className="mb-4">
-              <h5 style={{ color: '#fff' }}>TU TIENDA DE PERFUMES</h5>
-              <p>Aquí organizamos tu contenido. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </Col>
-            <Col md={3} className="mb-4">
-              <h5 style={{ color: '#fff' }}>SECCIONES</h5>
-              <ul className="list-unstyled">
-                <li><Link to="/category" className="text-light">Menu</Link></li>
-                <li><Link to="/category/nuevos" className="text-light">Perfumes Nuevos</Link></li>
-                <li><Link to="/category/mas vendidos" className="text-light">Más Vendidos</Link></li>
-                <li><Link to="/category/ofertas" className="text-light">Ofertas Exclusivas</Link></li>
-              </ul>
-            </Col>
-            <Col md={3} className="mb-4">
-              <h5 style={{ color: '#fff' }}>ENLACES DE INTERÉS</h5>
-              <ul className="list-unstyled">
-                <li>⚙️ Sitio desarrollado por SosaDaiana</li>
-                <li><Link to="/contacto" className="text-light">¿Querés uno así para tu negocio?</Link></li>
-              </ul>
-              </Col>
-            <Col md={3} className="mb-4">
-              <h5 style={{ color: '#fff' }}>CONTACTO</h5>
-              <ul className="list-unstyled">
-                <li><FaMapMarkerAlt /> El Abejional, San Pablo de León Cortés</li>
-                <li><FaEnvelope /> info@example.com</li>
-                <li><FaPhone /> +506 60190259 / +506 62531144</li>
-              </ul>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      {/* —————— COPYRIGHT BAR —————— */}
-<div className="copyright-bar">
   <Container>
-    <p>© {new Date().getFullYear()} Tu Tienda de Perfumes. Todos los derechos reservados.</p>
+    <div className="footer-columns">
+      <div>
+        <h5 style={{ color: '#fff' }}>TU TIENDA DE PERFUMES</h5>
+        <p>Aquí organizamos tu contenido. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
+      <div>
+        <h5 style={{ color: '#fff' }}>SECCIONES</h5>
+        <ul className="list-unstyled">
+        <li>
+  <a
+    href="#"
+    className="text-light"
+    onClick={(e) => {
+      e.preventDefault();
+      window.toggleCategoriasDesdeFooter?.();
+    }}
+  >
+    Categorías
+  </a>
+</li>
+
+
+
+          <li><Link to="/category/nuevos" className="text-light">Perfumes Nuevos</Link></li>
+          <li><Link to="/category/mas vendidos" className="text-light">Más Vendidos</Link></li>
+          <li><Link to="/category/ofertas" className="text-light">Ofertas Exclusivas</Link></li>
+        </ul>
+      </div>
+      <div>
+        <h5 style={{ color: '#fff' }}>ENLACES DE INTERÉS</h5>
+        <ul className="list-unstyled">
+          <li>⚙️ Sitio desarrollado por SosaDaianaDev</li>
+          <li><Link to="/contacto" className="text-light">¿Querés uno así para tu negocio?</Link></li>
+        </ul>
+      </div>
+      <div>
+        <h5 style={{ color: '#fff' }}>CONTACTO</h5>
+        <ul className="list-unstyled">
+          <li><FaMapMarkerAlt /> San Martin 123,Villa Mercedes, San Luis</li>
+          <li><FaEnvelope /> info@perfumes@gmail.com</li>
+          <li><FaPhone /> +506 60190259 / +506 62531144</li>
+        </ul>
+      </div>
+    </div>
   </Container>
 </div>
+
+      {/* —————— COPYRIGHT BAR —————— */}
+      <div className="bg-grey text-white text-center py-1 text-sm">
+  <div className="container">
+    <p>© 2025 Tu Tienda de Perfumes. Todos los derechos reservados.</p>
+  </div>
+</div>
+
 
       {/* Chat Bubble Component */}
       <ChatBubble />
